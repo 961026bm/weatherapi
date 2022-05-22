@@ -35,7 +35,9 @@ public class CurrentWeather {
         return main;
     }
 
-
+    public Weather[] getWeather() {
+        return weather;
+    }
 
     private static class Coords {
         private float lon;
@@ -50,7 +52,7 @@ public class CurrentWeather {
         }
     }
 
-    private static class Main {
+    public static class Main {
         private float temp;
         @JsonProperty("feels_like")
         private float feelsLike;
@@ -96,7 +98,7 @@ public class CurrentWeather {
         }
     }
 
-    private static class Weather {
+    public static class Weather {
         private int id;
         private String main;
         private String description;
