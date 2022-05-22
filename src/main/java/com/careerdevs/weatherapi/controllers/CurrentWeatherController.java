@@ -40,4 +40,25 @@ public class CurrentWeatherController {
         }
 
     }
+    @GetMapping("/city/{cityName}")
+    public ResponseEntity<?> getCurrentWeatherByCityRP (RestTemplate restTemplate, @PathVariable("city") String cityName ) {
+
+        try {
+            String apiKey = env.getProperty("OW_API_KEY");
+            String queryString = "?q=" + cityName + "&appid=" + apiKey + "&units=imperial";
+            String openWeatherURL = BASE_URL + queryString;
+
+            String openWeatherResponse = restTemplate.getForObject(openWeatherURL, String.class);
+
+            return ResponseEntity.ok(openWeatherResponse);
+            //return ResponseEntity.ok("api key: " + apiKey);
+        } catch (HttpClientErrorException.NotFound e) {
+            return ResponseEntity.status(404).body("City Not Found: " + cityName);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            System.out.println(e.getClass());
+            return ResponseEntity.internalServerError().body(e.getMessage());
+        }
+
+    }
 }
