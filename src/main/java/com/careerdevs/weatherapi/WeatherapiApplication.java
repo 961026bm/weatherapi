@@ -1,5 +1,6 @@
 package com.careerdevs.weatherapi;
 
+import com.careerdevs.weatherapi.controllers.CurrentWeatherController;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
