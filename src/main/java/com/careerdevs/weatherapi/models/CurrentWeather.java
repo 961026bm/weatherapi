@@ -3,13 +3,14 @@ package com.careerdevs.weatherapi.models;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class CurrentWeather {
+
     private String name;
 
     private int timezone;
 
     private int visibility;
 
-    private Coords coord;
+    private Coord coord;
 
     private Main main;
 
@@ -27,7 +28,7 @@ public class CurrentWeather {
         return visibility;
     }
 
-    public Coords getCoord() {
+    public Coord getCoord() {
         return coord;
     }
 
@@ -39,7 +40,7 @@ public class CurrentWeather {
         return weather;
     }
 
-    private static class Coords {
+    private static class Coord {
         private float lon;
         private float lat;
 

@@ -1,6 +1,7 @@
 package com.careerdevs.weatherapi.controllers;
 
 import com.careerdevs.weatherapi.models.CurrentWeather;
+import com.careerdevs.weatherapi.models.CurrentWeatherReport;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.http.ResponseEntity;
@@ -20,27 +21,27 @@ public class CurrentWeatherController {
 
     private final String BASE_URL = "https://api.openweathermap.org/data/2.5/weather";
 
-    @GetMapping("/city/{cityName}")
-    public ResponseEntity<?> getCurrentWeatherByCity (RestTemplate restTemplate, @PathVariable String cityName ) {
-
-        try {
-            String apiKey = env.getProperty("OW_API_KEY");
-            String queryString = "?q=" + cityName + "&appid=" + apiKey + "&units=imperial";
-            String openWeatherURL = BASE_URL + queryString;
-
-            String openWeatherResponse = restTemplate.getForObject(openWeatherURL, String.class);
-
-            return ResponseEntity.ok(openWeatherResponse);
-            //return ResponseEntity.ok("api key: " + apiKey);
-        } catch (HttpClientErrorException.NotFound e) {
-            return ResponseEntity.status(404).body("City Not Found: " + cityName);
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-            System.out.println(e.getClass());
-            return ResponseEntity.internalServerError().body(e.getMessage());
-        }
-
-    }
+//    @GetMapping("/city/{cityName}")
+//    public ResponseEntity<?> getCurrentWeatherByCity (RestTemplate restTemplate, @PathVariable String cityName ) {
+//
+//        try {
+//            String apiKey = env.getProperty("OW_API_KEY");
+//            String queryString = "?q=" + cityName + "&appid=" + apiKey + "&units=imperial";
+//            String openWeatherURL = BASE_URL + queryString;
+//
+//            String openWeatherResponse = restTemplate.getForObject(openWeatherURL, String.class);
+//
+//            return ResponseEntity.ok(openWeatherResponse);
+//            //return ResponseEntity.ok("api key: " + apiKey);
+//        } catch (HttpClientErrorException.NotFound e) {
+//            return ResponseEntity.status(404).body("City Not Found: " + cityName);
+//        } catch (Exception e) {
+//            System.out.println(e.getMessage());
+//            System.out.println(e.getClass());
+//            return ResponseEntity.internalServerError().body(e.getMessage());
+//        }
+//
+//    }
     @GetMapping("/city/{cityName}")
     public ResponseEntity<?> getCurrentWeatherByCityRP (RestTemplate restTemplate, @PathVariable("city") String cityName ) {
 
@@ -50,15 +51,28 @@ public class CurrentWeatherController {
             String openWeatherURL = BASE_URL + queryString;
             //String openWeatherResponse = restTemplate.getForObject(openWeatherURL, String.class);
 
-            CurrentWeather openWeatherResponse = restTemplate.getForObject(openWeatherURL, CurrentWeather.class);
+//            CurrentWeather openWeatherResponse = restTemplate.getForObject(openWeatherURL, CurrentWeather.class);
 
-            assert openWeatherResponse != null;
-            System.out.println("City: " + openWeatherResponse.getName());
-            System.out.println("Temp: " + openWeatherResponse.getMain().getTemp());
-            System.out.println("Desc: " + openWeatherResponse.getWeather()[0].getDescription());
-
-            return ResponseEntity.ok(openWeatherResponse);
+//          assert openWeatherResponse != null;
+//            System.out.println("City: " + openWeatherResponse.getName());
+//            System.out.println("Temp: " + openWeatherResponse.getMain().getTemp());
+//            System.out.println("Desc: " + openWeatherResponse.getWeather()[0].getDescription());
+//
+//            return ResponseEntity.ok(openWeatherResponse);
             //return ResponseEntity.ok("api key: " + apiKey);
+
+            CurrentWeather owRes = restTemplate.getForObject(openWeatherURL, CurrentWeather.class);
+
+            assert owRes != null;
+            CurrentWeatherReport report = new CurrentWeatherReport(
+                    owRes.getName(),
+                    owRes.getCoord(),
+                    owRes.getMain(),
+                    owRes.getWeather()[0]
+            );
+
+            return ResponseEntity.ok(report);
+
         } catch (HttpClientErrorException.NotFound e) {
             return ResponseEntity.status(404).body("City Not Found: " + cityName);
         } catch (Exception e) {
