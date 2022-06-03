@@ -40,7 +40,7 @@ public class CurrentWeather {
         return weather;
     }
 
-    private static class Coord {
+    public static class Coord {
         private float lon;
         private float lat;
 

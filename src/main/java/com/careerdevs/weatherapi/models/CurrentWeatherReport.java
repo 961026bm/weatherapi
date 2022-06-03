@@ -17,7 +17,7 @@ public class CurrentWeatherReport {
 
     public CurrentWeatherReport(
             String name,
-            CurrentWeather.Main coords,
+            CurrentWeather.Coord coord,
             CurrentWeather.Main main,
             CurrentWeather.Weather weather,
             String units
@@ -41,7 +41,7 @@ public class CurrentWeatherReport {
     }
 
     public String getUnits() {
-        return units
+        return units;
     }
 
     public float getLon() {
@@ -82,5 +82,24 @@ public class CurrentWeatherReport {
 
     public String getDescription() {
         return description;
+    }
+
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder("{");
+        sb.append("\"name\":\"").append(name).append('"');
+        sb.append(", \"main\":\"").append(main).append('"');
+        sb.append(", \"description\":\"").append(description).append('"');
+        sb.append(", \"units\":\"").append(units).append('"');
+        sb.append(", \"temp\":").append(temp);
+        sb.append(", \"feelsLike\":").append(feelsLike);
+        sb.append(", \"tempMin\":").append(tempMin);
+        sb.append(", \"tempMax\":").append(tempMax);
+        sb.append(", \"pressure\":").append(pressure);
+        sb.append(", \"humidity\":").append(humidity);
+        sb.append(", \"lon\":").append(lon);
+        sb.append(", \"lat\":").append(lat);
+        sb.append('}');
+        return sb.toString();
     }
 }
