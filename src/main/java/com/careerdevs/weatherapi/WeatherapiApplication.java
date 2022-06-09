@@ -11,4 +11,5 @@ public class WeatherapiApplication {
 		SpringApplication.run(WeatherapiApplication.class, args);
 	}
 
+
 }

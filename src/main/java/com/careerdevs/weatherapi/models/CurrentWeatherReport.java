@@ -101,5 +101,6 @@ public class CurrentWeatherReport {
         sb.append(", \"lat\":").append(lat);
         sb.append('}');
         return sb.toString();
+
     }
 }

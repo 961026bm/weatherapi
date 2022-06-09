@@ -120,5 +120,6 @@ public class CurrentWeather {
         public String getIcon() {
             return icon;
         }
+
     }
 }
