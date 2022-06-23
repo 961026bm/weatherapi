@@ -12,7 +12,7 @@ public class WeatherValidation {
             validationErrors.put("city", "city name required");
 
         } else if (
-                !city.replaceAll("["a-zA-Z -]", replacement ").equals(city)
+                !city.replaceAll("[a-zA-Z -]", "").equals(city)
         ) {
             // name should not include special chars/numbers
             validationErrors.put("city", "Invalid City Name");
