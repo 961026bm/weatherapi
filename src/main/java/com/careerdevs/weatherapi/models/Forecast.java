@@ -44,10 +44,11 @@ public class Forecast {
         @JsonInclude(JsonInclude.Include.NON_NULL)
         private Coord coord;
 
-       // private String dt_txt;
-        //public String getDt_txt(){
-          //  return dt_txt;
-        //}
+        private String dt_txt;
+
+        public String getDt_txt(){
+            return dt_txt;
+        }
 
         public float getPop() {
             return pop;

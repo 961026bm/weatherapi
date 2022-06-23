@@ -23,7 +23,7 @@ public class ForecastController {
     private final String BASE_URL = "https://api.openweathermap.org/data/2.5/forecast";
 
     @GetMapping("/city/{city}")
-    public ResponseEntity<?> getForecastByCity (RestTemplate restTemplate, @PathVariable String cityName) {
+    public ResponseEntity<?> getForecastByCity (RestTemplate restTemplate, @PathVariable (name = "city") String cityName) {
         try {
             String units = "imperial";
             String apiKey = env.getProperty("OW_API_KEY");
@@ -31,6 +31,7 @@ public class ForecastController {
             String url = BASE_URL + queryString;
 
             Forecast owRes = restTemplate.getForObject(url, Forecast.class);
+            System.out.println(url);
 
             //generate report
             assert owRes != null;

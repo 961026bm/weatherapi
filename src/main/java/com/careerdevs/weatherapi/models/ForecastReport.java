@@ -27,7 +27,7 @@ public class ForecastReport {
         private String temp;
         private String percentageOfPrecipitation;
 
-        public ForecastReportEntry(Forecast.ForecastWeatherData wd) {
+        public ForecastReportEntry(ForecastWeatherData wd) {
             description = wd.getWeather()[0].getMain() + " - " + wd.getWeather()[0].getDescription();
             dateTime = wd.getDateTime();
             temp = wd.getMain().getTemp() + "F";
