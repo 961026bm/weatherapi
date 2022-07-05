@@ -40,10 +40,6 @@ public class CurrentWeatherReport {
         return name;
     }
 
-    public String getUnits() {
-        return units;
-    }
-
     public float getLon() {
         return lon;
     }
@@ -84,6 +80,8 @@ public class CurrentWeatherReport {
         return description;
     }
 
+    public String getUnits() {return units;}
+
     @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder("{");
@@ -103,4 +101,5 @@ public class CurrentWeatherReport {
         return sb.toString();
 
     }
+
 }

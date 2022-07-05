@@ -2,6 +2,8 @@ package com.careerdevs.weatherapi.models;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import java.util.Arrays;
+
 public class CurrentWeather {
 
     private String name;
@@ -51,15 +53,24 @@ public class CurrentWeather {
         public float getLat() {
             return lat;
         }
+
+        @Override
+        public String toString() {
+            final StringBuilder sb = new StringBuilder("{");
+            sb.append("\"lon\":").append(lon);
+            sb.append(", \"lat\":").append(lat);
+            sb.append('}');
+            return sb.toString();
+        }
     }
 
     public static class Main {
         private float temp;
-        @JsonProperty("feels_like")
+       // @JsonProperty("feels_like")
         private float feelsLike;
         private float temp_min;
         private float temp_max;
-        private short pressure;
+        private int pressure;
         private float humidity;
 
         public float getTemp() {
@@ -78,7 +89,7 @@ public class CurrentWeather {
             return temp_max;
         }
 
-        public short getPressure() {
+        public int getPressure() {
             return pressure;
         }
 
@@ -88,14 +99,15 @@ public class CurrentWeather {
 
         @Override
         public String toString() {
-            return "Main{" +
-                    "temp=" + temp +
-                    ", feelsLike=" + feelsLike +
-                    ", temp_min=" + temp_min +
-                    ", temp_max=" + temp_max +
-                    ", pressure=" + pressure +
-                    ", humidity=" + humidity +
-                    '}';
+            final StringBuilder sb = new StringBuilder("{");
+            sb.append("\"temp\":").append(temp);
+            sb.append(", \"feelsLike\":").append(feelsLike);
+            sb.append(", \"temp_min\":").append(temp_min);
+            sb.append(", \"temp_max\":").append(temp_max);
+            sb.append(", \"pressure\":").append(pressure);
+            sb.append(", \"humidity\":").append(humidity);
+            sb.append('}');
+            return sb.toString();
         }
     }
 
@@ -121,5 +133,36 @@ public class CurrentWeather {
             return icon;
         }
 
+        @Override
+        public String toString() {
+            final StringBuilder sb = new StringBuilder("{");
+            sb.append("\"id\":").append(id);
+            sb.append(", \"main\":\"").append(main).append('"');
+            sb.append(", \"description\":\"").append(description).append('"');
+            sb.append(", \"icon\":\"").append(icon).append('"');
+            sb.append('}');
+            return sb.toString();
+        }
+    }
+
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder("{");
+        sb.append("\"name\":\"").append(name).append('"');
+        sb.append(", \"timezone\":").append(timezone);
+        sb.append(", \"visibility\":").append(visibility);
+        sb.append(", \"coord\":").append(coord);
+        sb.append(", \"main\":").append(main);
+        sb.append(", \"weather\":").append(Arrays.toString(weather));
+        sb.append('}');
+        return sb.toString();
+    }
+
+    public CurrentWeatherReport createReport(String units) {
+        return new CurrentWeatherReport(getName(),
+                getCoord(),
+                getMain(),
+                getWeather()[0],
+                units);
     }
 }

@@ -44,11 +44,11 @@ public class Forecast {
         @JsonInclude(JsonInclude.Include.NON_NULL)
         private Coord coord;
 
-        private String dt_txt;
+       // private String dt_txt;
 
-        public String getDt_txt(){
-            return dt_txt;
-        }
+       // public String getDt_txt(){
+         //   return dt_txt;
+       // }
 
         public float getPop() {
             return pop;
@@ -59,12 +59,14 @@ public class Forecast {
         }
     }
 
-
     public City getCity() {
         return city;
     }
 
     public ForecastWeatherData[] getList() {
         return list;
+    }
+    public ForecastReport createReport (String units) {
+        return new ForecastReport(this,units);
     }
 }
